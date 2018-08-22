@@ -21,6 +21,12 @@ ES6 -> React -> RxJS -> Recompose
 
 ( JSX, state, props, context, refs, style/classnames, life cycle methods, XHR calls, pointer/click events, )
 
+Architecture of the project :
+* [How to better organize your React applications?](https://medium.com/@alexmngn/how-to-better-organize-your-react-applications-2fd3ea1920f1)
+Styling :
+* [CSS Modules & Sass in Create React App](https://medium.com/@kswanie21/css-modules-sass-in-create-react-app-37c3152de9)
+* [Styling React with CSS](https://hackernoon.com/styling-react-with-css-9f6cef1823cc)
+
 
 💻
 * [React's Documentation](https://reactjs.org/docs/getting-started.html)

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './BackButton.sass'
 
 export class BackButton extends Component {
     constructor(props){
@@ -11,6 +12,6 @@ export class BackButton extends Component {
     }
 
     render() {
-        return <button onClick={this.goBack}>Go Back !</button>
+        return <button onClick={this.goBack} className="button is-danger">Go Back !</button>
     }
 }

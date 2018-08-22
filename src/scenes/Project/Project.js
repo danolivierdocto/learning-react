@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import { User } from './User';
-import { BackButton } from "./BackButton";
+import { UserDisplay } from './components/UserDisplay';
+import { BackButton } from "../../components/BackButton/BackButton";
+
+const style: any = require('./Project.sass');
 
 export class Project extends Component {
     constructor(props) {
@@ -9,7 +11,8 @@ export class Project extends Component {
             results: []
         }
     };
-
+    //TODO: The page render before the data is here
+    //TODO: Transfer this into /api
     //Get data before composant mount
     componentWillMount() {
         fetch('https://randomuser.me/api/?results=5')
@@ -27,11 +30,11 @@ export class Project extends Component {
         const {results} = this.state;
         console.log('test'); // why it is rendered 2 times ?
         return (
-            <div>
-                <h1>Ma super liste de user !</h1>
+            <div className={style.project_body}>
+                <h1 className='title'>Ma super liste de user !</h1>
                 <ul>
                     {results.map((result, index) => (
-                        <User key={index} data={result}/>
+                        <UserDisplay key={index} data={result}/>
                     ))}
                 </ul>
                 <BackButton history={this.props.history}/>

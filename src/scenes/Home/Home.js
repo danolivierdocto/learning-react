@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Columns from 'react-bulma-components/lib/components/columns';
+import { Columns, Button } from 'react-bulma-components/full';
+
+const style: any = require('./Home.sass');
 
 export class Home extends Component {
     render() {
         return(
-            <div>
-                <h1>My home page!</h1>
+            <div className={style.home_body}>
+                <h1 className="title">My home page!</h1>
                 <Columns>
                     <Columns.Column>
-                        <button>
+                        <Button >
                             <Link to='/about'>About</Link>
-                        </button>
+                        </Button>
                     </Columns.Column>
 
                     <Columns.Column>
-                        <button>
+                        <Button >
                             <Link to='/project'>Project</Link>
-                        </button>
+                        </Button>
                     </Columns.Column>
                 </Columns>
 

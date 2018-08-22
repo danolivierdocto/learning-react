@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-export class User extends Component {
+export class UserDisplay extends Component {
     render() {
         const data = this.props.data;
 
         return (
-            <li>
+            <li className='li'>
                 My name is {data.name.first} {data.name.last} and i'm {data.dob.age}
             </li>
         )
