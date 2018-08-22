@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import { UserDisplay } from './components/UserDisplay';
 import { BackButton } from "../../components/BackButton/BackButton";
-
-const style: any = require('./Project.sass');
+import style from './Project.sass';
 
 export class Project extends Component {
     constructor(props) {

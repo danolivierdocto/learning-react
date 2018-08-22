@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { BackButton } from "../../components/BackButton/BackButton";
-
-const style: any = require('./About.sass');
-
-
+import style from './About.sass';
 
 export class About extends Component {
     render() {

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Columns, Button } from 'react-bulma-components/full';
-
-const style: any = require('./Home.sass');
+import style from './Home.sass';
 
 export class Home extends Component {
     render() {
