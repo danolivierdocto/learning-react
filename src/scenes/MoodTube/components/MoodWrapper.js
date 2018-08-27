@@ -7,7 +7,7 @@ const moodList = [
   { id: 2, name: 'Sad', data_search: 'cry' },
   { id: 3, name: 'Happy', data_search: 'happy' },
   { id: 4, name: 'Dancing', data_search: 'dancing' },
-  { id: 5, name: 'Chilling', data_search: 'chill' },
+  { id: 5, name: 'Chilling', data_search: 'relax' },
   { id: 6, name: 'Working', data_search: 'work' },
   { id: 7, name: 'Sporty', data_search: 'fitness' },
   { id: 8, name: 'Sexual', data_search: 'sex' },

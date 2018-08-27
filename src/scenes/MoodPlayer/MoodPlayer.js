@@ -11,7 +11,7 @@ export class MoodPlayer extends Component {
     const currentMood = qs.parse(this.props.location.search)
     console.log(currentMood)
     console.log(this.props)
-    const url = `http://api.giphy.com/v1/gifs/search?q=${currentMood.search}&api_key=dc6zaTOxFJmzC&limit=5`
+    const url = `http://api.giphy.com/v1/gifs/search?q=${currentMood.search}&api_key=dc6zaTOxFJmzC&limit=10`
     fetch(url)
       .then(res => res.json())
       .then(data => {
@@ -24,12 +24,11 @@ export class MoodPlayer extends Component {
   render() {
     //TODO: can be ameliorated
     const currentMood = qs.parse(this.props.location.search)
-    const { results } = this.state
 
     return (
       <div className={style.moodplayer_body}>
         <h1 className="title">MOODPLAYER - {currentMood.mood}!</h1>
-        <GifDisplay data={results} />
+        <GifDisplay data={this.state.results} name={currentMood.mood} />
         <BackButton history={this.props.history} />
       </div>
     )
