@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import style from './MoodPlayer.sass'
 import { BackButton } from '../../components/BackButton/BackButton'
 import qs from 'query-string'
+import { GifDisplay } from './components/GifDisplay'
 
 export class MoodPlayer extends Component {
   state = { results: [] }
@@ -24,17 +25,11 @@ export class MoodPlayer extends Component {
     //TODO: can be ameliorated
     const currentMood = qs.parse(this.props.location.search)
     const { results } = this.state
-    console.log(results)
 
     return (
       <div className={style.moodplayer_body}>
         <h1 className="title">MOODPLAYER - {currentMood.mood}!</h1>
-        {results.map((result, index) => (
-          <img key={index} src={result.images.original.url} alt="" crossOrigin="anonymous" />
-        ))}
-
-        <div />
-
+        <GifDisplay data={results} />
         <BackButton history={this.props.history} />
       </div>
     )
