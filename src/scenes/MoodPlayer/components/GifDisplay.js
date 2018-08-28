@@ -3,9 +3,12 @@ import style from './GifDisplay.sass'
 
 export class GifDisplay extends Component {
   state = {
-    //TODO: make a loader component or display a gif right at the beginning
-    currentUrl: 'https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif',
+    currentUrl: '',
     random: '0',
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({ currentUrl: newProps.data[0].images.downsized_medium.url })
   }
 
   componentDidMount() {
@@ -25,9 +28,7 @@ export class GifDisplay extends Component {
         currentUrl: this.props.data[random].images.downsized_medium.url,
         random: random,
       })
-      console.log(random)
     } else {
-      console.log('same')
       this.changeGif()
     }
   }
