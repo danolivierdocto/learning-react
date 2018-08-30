@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Columns } from 'react-bulma-components/full'
-import style from './Home.sass'
-import LinkButton from '../../components/LinkButton'
+import style from 'scenes/Home/Home.sass'
+import LinkButton from 'components/LinkButton'
 
 export class Home extends Component {
   render() {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import LinkButton from '../../../components/LinkButton'
+import LinkButton from 'components/LinkButton'
 
 //TODO: add backend with DB
 const moodList = [

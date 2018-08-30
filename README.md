@@ -17,6 +17,7 @@ ES6 -> React -> RxJS -> Recompose
 ## Before getting started !
 
 `npm init react-app my-app` to create your project
+
 `npm run eject` to be able to configure as you want ( just so you know, when you eject, you can't go back )
 
 Then add Sass or Scss, Prettier and ESLint.

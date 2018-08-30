@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { UserDisplay } from './components/UserDisplay'
-import { BackButton } from '../../components/BackButton/BackButton'
-import style from './Project.sass'
+import { UserDisplay } from 'scenes/Project/components/UserDisplay'
+import { BackButton } from 'components/BackButton/BackButton'
+import style from 'scenes/Project/Project.sass'
 
 export class Project extends Component {
   state = { results: [] }
@@ -20,7 +20,6 @@ export class Project extends Component {
 
   render() {
     const { results } = this.state
-    console.log('test') // why it is rendered 2 times ?
     return (
       <div className={style.project_body}>
         <h1 className="title">Ma super liste de user !</h1>
