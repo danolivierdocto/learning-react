@@ -15,7 +15,10 @@ export default class App extends Component {
           <Route path="/about" component={About} />
           <Route path="/project" component={Project} />
           <Route path="/moodtube" component={MoodTube} />
-          <Route path="/i-feel" component={MoodPlayer} />
+          <Route
+            path="/(glitter|sad|happy|dancing|chilling|working|sporty|sexual|travelling|gangsta|trendy|tgif|frenchy|kawaï|rockstar|jazzy|country|blessed|80's|90's|2000's)"
+            component={MoodPlayer}
+          />
         </Switch>
       </div>
     )
