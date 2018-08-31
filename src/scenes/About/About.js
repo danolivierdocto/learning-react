@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { BackButton } from '../../components/BackButton/BackButton'
-import style from './About.sass'
+import { BackButton } from 'components/BackButton/BackButton'
+import style from 'scenes/About/About.sass'
 
 export class About extends Component {
   render() {

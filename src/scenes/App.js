@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { Home } from './Home/Home'
-import { About } from './About/About'
-import { Project } from './Project/Project'
-import { MoodPlayer } from './MoodPlayer/MoodPlayer'
-import { MoodTube } from './MoodTube/MoodTube'
+import { Home } from 'scenes/Home/Home'
+import { About } from 'scenes/About/About'
+import { Project } from 'scenes/Project/Project'
+import { MoodPlayer } from 'scenes/MoodPlayer/MoodPlayer'
+import { MoodTube } from 'scenes/MoodTube/MoodTube'
 
 export default class App extends Component {
   render() {

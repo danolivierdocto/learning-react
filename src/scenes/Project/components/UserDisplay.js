@@ -1,13 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export class UserDisplay extends Component {
-  render() {
-    const data = this.props.data
-
-    return (
-      <li className="li">
-        My name is {data.name.first} {data.name.last} and i'm {data.dob.age}
-      </li>
-    )
-  }
-}
+export const UserDisplay = props => (
+  <li className="li">
+    My name is {props.data.name.first} {props.data.name.last} and i'm {props.data.dob.age}
+  </li>
+)

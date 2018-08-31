@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './BackButton.sass'
+import 'components/BackButton/BackButton.sass'
 
 export class BackButton extends Component {
   goBack = () => {
