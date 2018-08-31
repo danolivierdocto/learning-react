@@ -17,9 +17,10 @@ export class SongDisplay extends PureComponent {
 
   componentWillUnmount() {
     clearInterval(this.interval)
-    console.log(new Date())
   }
 
+  //TODO: basically same function of changeGif. Make one global function that we can call in SongDisplay and
+  // GifDisplay
   changeSong = () => {
     const newRandom = Math.floor(Math.random() * this.state.numberOfSong)
     if (newRandom != this.state.random) {
