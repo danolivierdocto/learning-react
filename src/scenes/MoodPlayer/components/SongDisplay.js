@@ -8,7 +8,7 @@ export class SongDisplay extends PureComponent {
   }
 
   static getDerivedStateFromProps(props, state) {
-    return { currentSong: props.data[state.random].track.preview_url }
+    return { currentSong: props.data[state.random].track }
   }
 
   componentDidMount() {
@@ -32,6 +32,17 @@ export class SongDisplay extends PureComponent {
   }
 
   render() {
-    return <audio src={this.state.currentSong} controls autoPlay />
+    if (this.state.currentSong.preview_url === null) {
+      this.changeSong()
+    }
+    return (
+      <div>
+        <h2 className="subtitle">Now playing : {this.state.currentSong.name}</h2>
+        <audio src={this.state.currentSong.preview_url} autoPlay />
+        <button onClick={this.changeSong} className="button is-primary">
+          Shuffle !
+        </button>
+      </div>
+    )
   }
 }
