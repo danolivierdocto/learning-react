@@ -4,6 +4,7 @@ import style from 'scenes/MoodPlayer/components/SongDisplay'
 export class SongDisplay extends PureComponent {
   state = {
     random: '0',
+    numberOfSong: Object.keys(this.props.data).length,
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -20,7 +21,7 @@ export class SongDisplay extends PureComponent {
   }
 
   changeSong = () => {
-    const newRandom = Math.floor(Math.random() * 10)
+    const newRandom = Math.floor(Math.random() * this.state.numberOfSong)
     if (newRandom != this.state.random) {
       this.setState({
         random: newRandom,

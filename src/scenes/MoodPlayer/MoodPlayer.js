@@ -7,7 +7,7 @@ import { SongDisplay } from 'scenes/MoodPlayer/components/SongDisplay'
 const tokenSpotify = fetch('http://matthieuvignolle.fr/spotify.php').then(res => res.json())
 
 export class MoodPlayer extends PureComponent {
-  state = { results: [], tracks: [] }
+  state = { results: [], tracks: [], random: Math.floor(Math.random() * 50) }
 
   static getDerivedStateFromProps(props) {
     return { currentMood: props.location.state.name }
@@ -15,7 +15,7 @@ export class MoodPlayer extends PureComponent {
 
   componentDidMount() {
     const data = this.props.location.state
-    const url = `http://api.giphy.com/v1/gifs/search?q=${data.search}&api_key=dc6zaTOxFJmzC&limit=10`
+    const url = `http://api.giphy.com/v1/gifs/search?q=${data.search}&api_key=dc6zaTOxFJmzC&offset=${this.state.random}`
     fetch(url)
       .then(res => {
         if (res.ok) {
@@ -72,7 +72,6 @@ export class MoodPlayer extends PureComponent {
         this.setState({
           tracks: data.tracks.items,
         })
-        console.log(this.state.tracks)
       })
       .catch(error => {
         console.log(error)
