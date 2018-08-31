@@ -7,7 +7,7 @@ import { SongDisplay } from 'scenes/MoodPlayer/components/SongDisplay'
 const tokenSpotify = fetch('http://matthieuvignolle.fr/spotify.php').then(res => res.json())
 
 export class MoodPlayer extends PureComponent {
-  state = { results: [] }
+  state = { results: [], tracks: [] }
 
   static getDerivedStateFromProps(props) {
     return { currentMood: props.location.state.name }
@@ -50,12 +50,17 @@ export class MoodPlayer extends PureComponent {
   }
 
   spotify = data => {
-    fetch('https://api.spotify.com/v1/users/spotify/playlists/7uDoSz5VxK5lbXgj7tBMG9', {
-      headers: new Headers({
-        Authorization: 'Bearer ' + data.access_token,
-        'Content-Type': 'application/x-www-form-urlencoded',
-      }),
-    })
+    fetch(
+      `https://api.spotify.com/v1/users/${this.props.location.state.user_id}/playlists/${
+        this.props.location.state.playlist_id
+      }`,
+      {
+        headers: new Headers({
+          Authorization: 'Bearer ' + data.access_token,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }),
+      }
+    )
       .then(res => {
         if (res.ok) {
           return res.json()
@@ -64,7 +69,10 @@ export class MoodPlayer extends PureComponent {
         }
       })
       .then(data => {
-        console.log(data.tracks.items)
+        this.setState({
+          tracks: data.tracks.items,
+        })
+        console.log(this.state.tracks)
       })
       .catch(error => {
         console.log(error)
@@ -72,18 +80,22 @@ export class MoodPlayer extends PureComponent {
   }
 
   render() {
+    let isLoaded = <p>Loading</p>
+
+    //TODO: sometimes the song is null
+
+    if (Object.keys(this.state.tracks).length != 0 && Object.keys(this.state.results).length != 0) {
+      isLoaded = (
+        <div>
+          <SongDisplay data={this.state.tracks} />
+          <GifDisplay data={this.state.results} name={this.props.location.state.name} />
+        </div>
+      )
+    }
     return (
       <div className={style.moodplayer_body}>
         <h1 className="title">MOODPLAYER - {this.props.location.state.name}!</h1>
-        <SongDisplay />
-        {/*TODO: When api fail or didn't finish to fetch the component GifDisplay should not be rendered bc it crash
-         the view */}
-        {/*TODO: change this for a loading component, for slow 3G ... or do a Fetch component*/}
-        {Object.keys(this.state.results).length === 0 ? (
-          <p>Loading</p>
-        ) : (
-          <GifDisplay data={this.state.results} name={this.props.location.state.name} />
-        )}
+        {isLoaded}
         <BackButton history={this.props.history} />
       </div>
     )
