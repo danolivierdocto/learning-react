@@ -1,50 +1,49 @@
-import React, { Component } from 'react'
-import style from './SongDisplay.sass'
-import qs from 'query-string'
+import React, { PureComponent } from 'react'
+import style from 'scenes/MoodPlayer/components/SongDisplay'
 
-const tokenSpotify = fetch('http://matthieuvignolle.fr/spotify.php').then(res => res.json())
-
-export class SongDisplay extends Component {
-  componentDidMount() {
-    fetch('http://matthieuvignolle.fr/spotify.php')
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        } else {
-          throw new Error('Something went wrong')
-        }
-      })
-      .then(data => {
-        this.spotify(data)
-      })
-      .catch(error => {
-        console.log(error)
-      })
+export class SongDisplay extends PureComponent {
+  state = {
+    random: '0',
+    numberOfSong: Object.keys(this.props.data).length,
   }
 
-  spotify = data => {
-    fetch('https://api.spotify.com/v1/users/spotify/playlists/7uDoSz5VxK5lbXgj7tBMG9', {
-      headers: new Headers({
-        Authorization: 'Bearer ' + data.access_token,
-        'Content-Type': 'application/x-www-form-urlencoded',
-      }),
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        } else {
-          throw new Error('Something went wrong')
-        }
+  static getDerivedStateFromProps(props, state) {
+    return { currentSong: props.data[state.random].track }
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(this.changeSong, 30000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+
+  //TODO: basically same function of changeGif. Make one global function that we can call in SongDisplay and
+  // GifDisplay
+  changeSong = () => {
+    const newRandom = Math.floor(Math.random() * this.state.numberOfSong)
+    if (newRandom != this.state.random) {
+      this.setState({
+        random: newRandom,
       })
-      .then(data => {
-        console.log(data.tracks.items)
-      })
-      .catch(error => {
-        console.log(error)
-      })
+    } else {
+      this.changeSong()
+    }
   }
 
   render() {
-    return <audio src={this.props} controls />
+    if (this.state.currentSong.preview_url === null) {
+      this.changeSong()
+    }
+    return (
+      <div>
+        <h2 className="subtitle">Now playing : {this.state.currentSong.name}</h2>
+        <audio src={this.state.currentSong.preview_url} autoPlay />
+        <button onClick={this.changeSong} className="button is-primary">
+          Shuffle !
+        </button>
+      </div>
+    )
   }
 }
