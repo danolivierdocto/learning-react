@@ -3,19 +3,19 @@ import style from './MoodPlayer.sass'
 import { BackButton } from 'components/BackButton/BackButton'
 import { GifDisplay } from 'scenes/MoodPlayer/components/GifDisplay'
 import { SongDisplay } from 'scenes/MoodPlayer/components/SongDisplay'
+import { isEmpty } from 'lodash'
 
 const tokenSpotify = fetch('http://matthieuvignolle.fr/spotify.php').then(res => res.json())
 
 export class MoodPlayer extends PureComponent {
   state = { results: [], tracks: [], random: Math.floor(Math.random() * 50) }
 
-  static getDerivedStateFromProps(props) {
-    return { currentMood: props.location.state.name }
-  }
+  data = this.props.location.state
 
   componentDidMount() {
-    const data = this.props.location.state
-    const url = `http://api.giphy.com/v1/gifs/search?q=${data.search}&api_key=dc6zaTOxFJmzC&offset=${this.state.random}`
+    const url = `http://api.giphy.com/v1/gifs/search?q=${this.data.search}&api_key=dc6zaTOxFJmzC&offset=${
+      this.state.random
+    }`
     fetch(url)
       .then(res => {
         if (res.ok) {
@@ -49,18 +49,13 @@ export class MoodPlayer extends PureComponent {
       })
   }
 
-  spotify = data => {
-    fetch(
-      `https://api.spotify.com/v1/users/${this.props.location.state.user_id}/playlists/${
-        this.props.location.state.playlist_id
-      }`,
-      {
-        headers: new Headers({
-          Authorization: 'Bearer ' + data.access_token,
-          'Content-Type': 'application/x-www-form-urlencoded',
-        }),
-      }
-    )
+  spotify = data =>
+    fetch(`https://api.spotify.com/v1/users/${this.data.user_id}/playlists/${this.data.playlist_id}`, {
+      headers: new Headers({
+        Authorization: 'Bearer ' + data.access_token,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }),
+    })
       .then(res => {
         if (res.ok) {
           return res.json()
@@ -76,25 +71,19 @@ export class MoodPlayer extends PureComponent {
       .catch(error => {
         console.log(error)
       })
-  }
 
   render() {
-    let isLoaded = <p>Loading</p>
-
-    //TODO: sometimes the song is null
-
-    if (Object.keys(this.state.tracks).length != 0 && Object.keys(this.state.results).length != 0) {
-      isLoaded = (
-        <div>
-          <SongDisplay data={this.state.tracks} />
-          <GifDisplay data={this.state.results} name={this.props.location.state.name} />
-        </div>
-      )
-    }
     return (
       <div className={style.moodplayer_body}>
-        <h1 className="title">MOODPLAYER - {this.props.location.state.name}!</h1>
-        {isLoaded}
+        <h1 className="title">MOODPLAYER - {this.data.name}!</h1>
+        {!isEmpty(this.state.tracks) && !isEmpty(this.state.results) ? (
+          <div>
+            <SongDisplay data={this.state.tracks} />
+            <GifDisplay data={this.state.results} name={this.data.name} />
+          </div>
+        ) : (
+          <p>Loading</p>
+        )}
         <BackButton history={this.props.history} />
       </div>
     )
